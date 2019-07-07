@@ -12,7 +12,7 @@ songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays
     (
         songplay_id INT, 
         start_time TIME, 
-        user_id INT, 
+        user_id VARCHAR, 
         level VARCHAR, 
         song_id VARCHAR, 
         artist_id VARCHAR, 
@@ -24,7 +24,7 @@ songplay_table_create = (""" CREATE TABLE IF NOT EXISTS songplays
 
 user_table_create = (""" CREATE TABLE IF NOT EXISTS users
     (
-        user_id INT, 
+        user_id VARCHAR, 
         first_name VARCHAR, 
         last_name VARCHAR, 
         gender VARCHAR, 
@@ -54,10 +54,10 @@ artist_table_create = (""" CREATE TABLE IF NOT EXISTS artists
 
 time_table_create = (""" CREATE TABLE IF NOT EXISTS time
     (
-        start_time TIME, 
+        time TIME, 
         hour INT, 
         day INT, 
-        week INT, 
+        weekofyear INT, 
         month INT, 
         year INT, 
         weekday INT
@@ -72,15 +72,14 @@ songplay_table_insert = (""" INSERT INTO songplays (songplay_id, start_time, use
 user_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level)
                          VALUES (%s, %s, %s, %s, %s) """)
 
-song_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level)
+song_table_insert = (""" INSERT INTO songs (song_id, title, artist_id, year, duration)
                          VALUES (%s, %s, %s, %s, %s) """)
 
-artist_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level)
+artist_table_insert = (""" INSERT INTO artists (artist_id, name, location, latitude, longitude)
                          VALUES (%s, %s, %s, %s, %s) """)
 
-
-time_table_insert = (""" INSERT INTO users (user_id, first_name, last_name, gender, level)
-                         VALUES (%s, %s, %s, %s, %s) """)
+time_table_insert = (""" INSERT INTO time (time, hour, day, weekofyear, month, year, weekday)
+                         VALUES (%s, %s, %s, %s, %s, %s, %s) """)
 # FIND SONGS
 
 song_select = ("""
