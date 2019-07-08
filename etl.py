@@ -1,3 +1,5 @@
+# This script Extract the data, Transform to fit the db and Load them.
+
 import os
 import glob
 import psycopg2
@@ -6,6 +8,19 @@ from sql_queries import *
 
 
 def process_song_file(cur, filepath):
+    """
+    DESCRIPTION:
+        This function can be used to read the file in the filepath (data/song_data)
+        to get the user and time info and used to populate the users and time dim tables.
+
+    ARGUMENTS:
+        cur: the cursor object. 
+        filepath: log data file path. 
+
+    RETURNS:
+        None
+    """
+    
     # open song file
     df = pd.read_json(filepath, lines=True)
 
@@ -31,6 +46,19 @@ def process_song_file(cur, filepath):
 
 
 def process_log_file(cur, filepath):
+    """
+    DESCRIPTION:
+        This function can be used to read the file in the filepath (data/log_data)
+        to get songs data with the filter of 'page' as 'NextSong'.
+
+    ARGUMENTS:
+        cur: the cursor object. 
+        filepath: log data file path. 
+
+    RETURNS:
+        None
+    """
+
     # open log file
     df = pd.read_json(filepath, lines=True)
 
@@ -105,6 +133,20 @@ def process_log_file(cur, filepath):
 
 
 def process_data(cur, conn, filepath, func):
+    """
+    DESCRIPTION:
+        This function iterate to all files in the folders and load them into the db.
+
+    ARGUMENTS:
+        cur: the cursor object;
+        cur: Command to execute queries and others in the database session;
+        filepath: log data file path;
+        func: function used in the script.
+
+    RETURNS:
+        None
+    """
+
     # get all files matching extension from directory
     all_files = []
     for root, dirs, files in os.walk(filepath):
@@ -135,3 +177,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    

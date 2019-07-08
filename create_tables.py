@@ -1,8 +1,24 @@
+# Code that creates the datatabase and call the sql_queries.py to produce the tables.
+
 import psycopg2
 from sql_queries import create_table_queries, drop_table_queries
 
-
 def create_database():
+    """
+    DESCRIPTION:
+        This function is used to connect to the database 'studentdb'.
+        It drops any other database created before with the name 'sparkifydb'.
+        And recreate the database for this project.
+        In the end, closes the connection with 'studentdb' to maintain only 'sparkifydb'.
+
+    ARGUMENTS:
+        none.
+
+    RETURNS:
+        conn: Connection to the database;
+        cur: Command to execute queries and others in the database session.
+    """
+    
     # connect to default database
     conn = psycopg2.connect("host=127.0.0.1 dbname=studentdb user=student password=student")
     conn.set_session(autocommit=True)
@@ -23,12 +39,36 @@ def create_database():
 
 
 def drop_tables(cur, conn):
+    """
+    DESCRIPTION:
+        This function drops any other database created before with the name 'sparkifydb'.
+
+    ARGUMENTS:
+        cur: Command to execute queries and others in the database session;
+        conn: Connection to the database.
+
+    RETURNS:
+        None.
+    """
+    
     for query in drop_table_queries:
         cur.execute(query)
         conn.commit()
 
 
 def create_tables(cur, conn):
+    """
+    DESCRIPTION:
+        This function creates the tables for the db.
+
+    ARGUMENTS:
+        cur: Command to execute queries and others in the database session;
+        conn: Connection to the database.
+
+    RETURNS:
+        None.
+    """
+    
     for query in create_table_queries:
         cur.execute(query)
         conn.commit()
@@ -45,3 +85,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
