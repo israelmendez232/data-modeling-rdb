@@ -44,7 +44,7 @@ The **Dimension Tables** are and the source of the data from:
 
 Here is visually:
 
-![Tables for the PostgreSQL and Data Modeling RDS Project - By Israel Mendes.](/images/tables.png "Tables for the PostgreSQL and Data Modeling RDS Project - By Israel Mendes.")
+![Tables for the PostgreSQL and Data Modeling RDS Project - By Israel Mendes.](https://raw.githubusercontent.com/israelmendez232/data-modeling-rdb/master/Images/tables.png "Tables for the PostgreSQL and Data Modeling RDS Project - By Israel Mendes.")
 
 ## 4. ETL
 After all the work of creating the model and the tables, it's time to populate them. I used an Extract-Transform-Load process is at `etl.py` to pull the data from `data\log_data` and `data\song_data`. Remembering that the information it's in JSON format. 
